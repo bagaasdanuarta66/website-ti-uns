@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Teknik Industri UNS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #3B82F6;
+            --accent-color: #60A5FA;
+            --danger-color: #EF4444;
+            --success-color: #10B981;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .admin-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-logo i {
+            font-size: 2.5rem;
+        }
+
+        .admin-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .admin-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .admin-body {
+            padding: 40px 30px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .btn-login.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        .btn-login.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E5E7EB;
+        }
+
+        .info-box {
+            background: #FEF3C7;
+            border: 2px solid #FCD34D;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .info-box i {
+            color: #F59E0B;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .info-box-content {
+            flex: 1;
+        }
+
+        .info-box-content strong {
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-box-content p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .back-link a:hover {
+            gap: 12px;
+        }
+
+        .error-message {
+            background: #FEE2E2;
+            border: 2px solid #FCA5A5;
+            border-radius: 10px;
+            padding: 12px;
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        @media (max-width: 480px) {
+            .admin-container {
+                margin: 0;
+            }
+            
+            .admin-body {
+                padding: 30px 20px;
+            }
+            
+            .admin-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-logo">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h1>Admin Panel</h1>
+            <p>Teknik Industri UNS</p>
+        </div>
+
+        <div class="admin-body">
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Email atau password salah!</span>
+            </div>
+
+            <div class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-input" 
+                            placeholder="admin@ti.uns.ac.id"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="form-input" 
+                            placeholder="••••••••"
+                            required
+                        >
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <span id="btnText">Masuk</span>
+                    <div class="spinner"></div>
+                </button>
+            </div>
+
+            <div class="divider">INFO SISTEM</div>
+
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <div class="info-box-content">
+                    <strong>Fitur dalam Pengembangan</strong>
+                    <p>Halaman admin akan terintegrasi dengan Firebase untuk manajemen konten website. Saat ini masih dalam tahap development.</p>
+                </div>
+            </div>
+
+            <div class="back-link">
+                <a href="index.html">
+                    <i class="fas fa-arrow-left"></i>
+                    Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = togglePassword.querySelector('i');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            
+            if (type === 'text') {
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        });
+
+        // Login form handler
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = document.getElementById('btnText');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const emailInput = document.getElementById('email');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
+
+        loginBtn.addEventListener('click', async () => {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Hide error message
+            errorMessage.classList.remove('show');
+
+            // Validation
+            if (!email || !password) {
+                errorText.textContent = 'Email dan password harus diisi!';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            // Loading state
+            loginBtn.classList.add('loading');
+            btnText.textContent = 'Memproses...';
+            loginBtn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                // Remove loading state
+                loginBtn.classList.remove('loading');
+                btnText.textContent = 'Masuk';
+                loginBtn.disabled = false;
+
+                // Show info message
+                errorText.innerHTML = '<strong>Fitur Login:</strong> Akan diintegrasikan dengan Firebase Authentication. Untuk saat ini, halaman admin masih dalam tahap development.';
+                errorMessage.style.background = '#DBEAFE';
+                errorMessage.style.borderColor = '#93C5FD';
+                errorMessage.style.color = '#1E40AF';
+                errorMessage.classList.add('show');
+
+                console.log('%c🔐 Login Attempt', 'color: #1E40AF; font-size: 16px; font-weight: bold;');
+                console.log('Email:', email);
+                console.log('Status: Fitur dalam pengembangan');
+                console.log('%cFirebase Authentication akan segera diintegrasikan', 'color: #10B981; font-size: 12px;');
+            }, 1500);
+        });
+
+        // Enter key to submit
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+
+        emailInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                passwordInput.focus();
+            }
+        });
+
+        // Console message
+        console.log('%c👨‍💼 Admin Panel', 'color: #1E40AF; font-size: 24px; font-weight: bold;');
+        console.log('%cHalaman: admin.html', 'color: #6B7280; font-size: 14px;');
+        console.log('%cFirebase Integration: Coming Soon', 'color: #F59E0B; font-size: 14px;');
+        console.log('%c\nNext Steps:', 'color: #10B981; font-size: 16px; font-weight: bold;');
+        console.log('1. Setup Firebase Project');
+        console.log('2. Integrate Firebase Authentication');
+        console.log('3. Create Firestore Database');
+        console.log('4. Build Admin Dashboard');
+    </script>
+</body>
+</html>

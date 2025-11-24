@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Industri UNS - Prestasi Gemilang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="container">
+            <a href="#beranda" class="logo">
+                <div class="logo-circle">TI</div>
+                <div class="logo-text">
+                    <span class="logo-title">Teknik Industri</span>
+                    <span class="logo-subtitle">Universitas Sebelas Maret</span>
+                </div>
+            </a>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#beranda" class="nav-link">Beranda</a></li>
+                <li><a href="#tentang" class="nav-link">Tentang</a></li>
+                <li><a href="#laboratorium" class="nav-link">Laboratorium</a></li>
+                <li><a href="#karya" class="nav-link">Karya</a></li>
+                <li><a href="#mahasiswa" class="nav-link">Mahasiswa Berprestasi</a></li>
+                <li><a href="#alumni" class="nav-link">Alumni</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">SELAMAT DATANG DI</h1>
+                    <h2 class="hero-subtitle">TEKNIK INDUSTRI UNS</h2>
+                    <p class="hero-description">Prestasi Gemilang</p>
+                    <p class="hero-tagline">Menjadi program studi teknik industri yang unggul di tingkat nasional dan internasional dalam pengembangan ilmu pengetahuan, teknologi, dan seni</p>
+                    <div class="hero-buttons">
+                        <a href="#tentang" class="btn btn-primary">Selengkapnya</a>
+                        <a href="#laboratorium" class="btn btn-secondary">Lihat Fasilitas</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-image-wrapper">
+                        <img src="assets/hero-image.jpg" alt="Kampus TI UNS" class="hero-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Mahasiswa Aktif</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-label">Dosen Berkualitas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-flask"></i></div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Laboratorium</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-number" data-target="1000">0</div>
+                    <div class="stat-label">Alumni</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Section -->
+    <section id="tentang" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Tentang Program Studi</h2>
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Visi</h3>
+                    <p>Menjadi program studi teknik industri yang unggul di tingkat nasional dan internasional dalam pengembangan ilmu pengetahuan, teknologi, dan seni bidang teknik industri yang berbasis riset untuk mendukung pembangunan berkelanjutan.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Misi</h3>
+                    <ul class="mission-list">
+                        <li>Menyelenggarakan pendidikan tinggi yang berkualitas di bidang teknik industri</li>
+                        <li>Melaksanakan penelitian yang inovatif dan berkontribusi pada pengembangan ilmu</li>
+                        <li>Mengimplementasikan pengabdian kepada masyarakat berbasis riset</li>
+                        <li>Membangun kerjasama dengan stakeholder untuk meningkatkan kualitas lulusan</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Akreditasi A</h4>
+                    <p>Terakreditasi A oleh BAN-PT</p>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-building"></i>
+                    <h4>Fasilitas Modern</h4>
+                    <p>Laboratorium lengkap dan perpustakaan</p>
+                </div>
+                <div class="achievement-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Kerjasama Industri</h4>
+                    <p>Partnership dengan perusahaan terkemuka</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laboratorium Section -->
+    <section id="laboratorium" class="lab-section">
+        <div class="container">
+            <h2 class="section-title">Laboratorium</h2>
+            <p class="section-subtitle">Fasilitas laboratorium modern untuk mendukung pembelajaran dan penelitian</p>
+            <div class="lab-grid">
+                <div class="lab-card">
+                    <div class="lab-icon"><i class="fas fa-user-cog"></i></div>
+                    <h3>LPSKE</h3>
+                    <h4>Lab Perancangan Sistem Kerja dan Ergonomi</h4>
+                    <p>Laboratorium yang fokus pada studi perancangan sistem kerja, ergonomi, dan keselamatan kerja</p>
+                    <div class="lab-features">
+                        <span class="lab-tag">Antropometri Kit</span>
+                        <span class="lab-tag">Ergonomic Workstation</span>
+                        <span class="lab-tag">Safety Equipment</span>
+                    </div>
+                    <a href="https://industri.ft.uns.ac.id/laboratorium-lpske/" target="_blank" class="lab-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-icon"><i class="fas fa-robot"></i></div>
+                    <h3>LSTAR</h3>
+                    <h4>Lab Sistem Produksi dan Otomasi</h4>
+                    <p>Laboratorium yang mengembangkan sistem produksi modern dan otomasi industri</p>
+                    <div class="lab-features">
+                        <span class="lab-tag">PLC System</span>
+                        <span class="lab-tag">Robot Industrial</span>
+                        <span class="lab-tag">CAD/CAM Software</span>
+                    </div>
+                    <a href="#" class="lab-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Lab Kualitas</h3>
+                    <h4>Lab Pengendalian Kualitas</h4>
+                    <p>Fokus pada pengukuran, analisis, dan pengendalian kualitas produk</p>
+                    <div class="lab-features">
+                        <span class="lab-tag">Measuring Tools</span>
+                        <span class="lab-tag">Statistical Software</span>
+                        <span class="lab-tag">Quality Control</span>
+                    </div>
+                    <a href="#" class="lab-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Karya Section -->
+    <section id="karya" class="karya-section">
+        <div class="container">
+            <h2 class="section-title">Karya Mahasiswa & Riset</h2>
+            <p class="section-subtitle">Inovasi dan penelitian mahasiswa Teknik Industri UNS</p>
+            <div class="karya-grid">
+                <div class="karya-card">
+                    <div class="karya-image">
+                        <img src="assets/karya-1.jpg" alt="Karya 1">
+                        <div class="karya-overlay">
+                            <span class="karya-category">Software Development</span>
+                        </div>
+                    </div>
+                    <div class="karya-content">
+                        <h3>Sistem Informasi Manajemen Produksi</h3>
+                        <p class="karya-author"><i class="fas fa-user"></i> Tim Mahasiswa Angkatan 2021</p>
+                        <p class="karya-desc">Aplikasi untuk mengoptimalkan proses manajemen produksi dengan dashboard interaktif</p>
+                        <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="karya-card">
+                    <div class="karya-image">
+                        <img src="assets/karya-2.jpg" alt="Karya 2">
+                        <div class="karya-overlay">
+                            <span class="karya-category">Robotika</span>
+                        </div>
+                    </div>
+                    <div class="karya-content">
+                        <h3>Robot Sortir Otomatis Berbasis AI</h3>
+                        <p class="karya-author"><i class="fas fa-user"></i> Kelompok Riset Otomasi</p>
+                        <p class="karya-desc">Robot pintar untuk sortir produk menggunakan computer vision dan machine learning</p>
+                        <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="karya-card">
+                    <div class="karya-image">
+                        <img src="assets/karya-3.jpg" alt="Karya 3">
+                        <div class="karya-overlay">
+                            <span class="karya-category">Penelitian</span>
+                        </div>
+                    </div>
+                    <div class="karya-content">
+                        <h3>Analisis Ergonomi Workstation</h3>
+                        <p class="karya-author"><i class="fas fa-user"></i> Lab LPSKE</p>
+                        <p class="karya-desc">Studi komprehensif tentang ergonomi workstation untuk meningkatkan produktivitas</p>
+                        <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="karya-card">
+                    <div class="karya-image">
+                        <img src="assets/karya-4.jpg" alt="Karya 4">
+                        <div class="karya-overlay">
+                            <span class="karya-category">Operations Research</span>
+                        </div>
+                    </div>
+                    <div class="karya-content">
+                        <h3>Optimasi Supply Chain Management</h3>
+                        <p class="karya-author"><i class="fas fa-user"></i> Mahasiswa Tugas Akhir</p>
+                        <p class="karya-desc">Model optimasi untuk efisiensi supply chain menggunakan algoritma genetika</p>
+                        <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mahasiswa Berprestasi Section -->
+    <section id="mahasiswa" class="mahasiswa-section">
+        <div class="container">
+            <h2 class="section-title">Mahasiswa Berprestasi</h2>
+            <p class="section-subtitle">Prestasi gemilang mahasiswa Teknik Industri UNS</p>
+            <div class="mahasiswa-grid">
+                <div class="mahasiswa-card">
+                    <div class="mahasiswa-image">
+                        <img src="assets/mahasiswa-1.jpg" alt="Ahmad Fauzi">
+                        <div class="mahasiswa-badge"><i class="fas fa-trophy"></i></div>
+                    </div>
+                    <div class="mahasiswa-content">
+                        <h3>Ahmad Fauzi</h3>
+                        <p class="mahasiswa-year"><i class="fas fa-calendar"></i> 2024</p>
+                        <p class="mahasiswa-achievement">Juara 1 Kompetisi Inovasi Teknologi Nasional 2024</p>
+                    </div>
+                </div>
+
+                <div class="mahasiswa-card">
+                    <div class="mahasiswa-image">
+                        <img src="assets/mahasiswa-2.jpg" alt="Siti Nurhaliza">
+                        <div class="mahasiswa-badge"><i class="fas fa-trophy"></i></div>
+                    </div>
+                    <div class="mahasiswa-content">
+                        <h3>Siti Nurhaliza</h3>
+                        <p class="mahasiswa-year"><i class="fas fa-calendar"></i> 2024</p>
+                        <p class="mahasiswa-achievement">Best Paper Award - International Conference on Industrial Engineering</p>
+                    </div>
+                </div>
+
+                <div class="mahasiswa-card">
+                    <div class="mahasiswa-image">
+                        <img src="assets/mahasiswa-3.jpg" alt="Budi Santoso">
+                        <div class="mahasiswa-badge"><i class="fas fa-trophy"></i></div>
+                    </div>
+                    <div class="mahasiswa-content">
+                        <h3>Budi Santoso</h3>
+                        <p class="mahasiswa-year"><i class="fas fa-calendar"></i> 2023</p>
+                        <p class="mahasiswa-achievement">Juara 2 Lomba Karya Tulis Ilmiah Tingkat Nasional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alumni Section -->
+    <section id="alumni" class="alumni-section">
+        <div class="container">
+            <h2 class="section-title">Alumni Berprestasi</h2>
+            <p class="section-subtitle">Jejak sukses alumni Teknik Industri UNS di berbagai bidang</p>
+            <div class="alumni-list">
+                <div class="alumni-card">
+                    <div class="alumni-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="alumni-info">
+                        <h3>Dr. Rizki Pratama, S.T., M.T.</h3>
+                        <p class="alumni-position"><i class="fas fa-briefcase"></i> Production Manager - PT Toyota Astra Motor</p>
+                        <p class="alumni-year"><i class="fas fa-graduation-cap"></i> Lulusan 2015</p>
+                        <p class="alumni-story">Lulusan TI UNS yang kini memimpin divisi produksi di salah satu perusahaan otomotif terkemuka</p>
+                    </div>
+                </div>
+
+                <div class="alumni-card">
+                    <div class="alumni-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="alumni-info">
+                        <h3>Diah Ayu Lestari, S.T., MBA</h3>
+                        <p class="alumni-position"><i class="fas fa-briefcase"></i> Supply Chain Consultant - McKinsey & Company</p>
+                        <p class="alumni-year"><i class="fas fa-graduation-cap"></i> Lulusan 2017</p>
+                        <p class="alumni-story">Berkarir di konsultan internasional setelah menyelesaikan MBA di luar negeri</p>
+                    </div>
+                </div>
+
+                <div class="alumni-card">
+                    <div class="alumni-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="alumni-info">
+                        <h3>Eko Prasetyo, S.T., M.Sc.</h3>
+                        <p class="alumni-position"><i class="fas fa-briefcase"></i> Entrepreneur - Startup Technology</p>
+                        <p class="alumni-year"><i class="fas fa-graduation-cap"></i> Lulusan 2018</p>
+                        <p class="alumni-story">Founder startup teknologi yang fokus pada solusi manufaktur digital</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alumni-cta">
+                <h3>Bergabung dengan Alumni Network</h3>
+                <p>Daftarkan diri Anda dan tetap terhubung dengan keluarga besar TI UNS</p>
+                <a href="#" class="btn btn-primary">Daftar Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Teknik Industri UNS</h3>
+                    <p>Program Studi Teknik Industri Fakultas Teknik Universitas Sebelas Maret</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Ir. Sutami 36A, Kentingan, Surakarta 57126</p>
+                    <p><i class="fas fa-phone"></i> (0271) 632163</p>
+                    <p><i class="fas fa-envelope"></i> ti@ft.uns.ac.id</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Link Terkait</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://uns.ac.id" target="_blank">UNS Official</a></li>
+                        <li><a href="https://ft.uns.ac.id" target="_blank">Fakultas Teknik</a></li>
+                        <li><a href="https://simaster.uns.ac.id" target="_blank">SIMASTER</a></li>
+                        <li><a href="https://library.uns.ac.id" target="_blank">Perpustakaan</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Teknik Industri UNS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
