@@ -364,99 +364,74 @@
         </div>
     </div>
 
-    <script>
-        // Password toggle
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = togglePassword.querySelector('i');
+    <script type="module">
+    import { auth, signInWithEmailAndPassword } from './firebase-config.js';
 
-        togglePassword.addEventListener('click', () => {
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
+    const loginBtn = document.getElementById('loginBtn');
+    const btnText = document.getElementById('btnText');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+
+    loginBtn.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        // Validation
+        if (!email || !password) {
+            errorText.textContent = 'Email dan password harus diisi!';
+            errorMessage.classList.add('show');
+            return;
+        }
+
+        // Hide error
+        errorMessage.classList.remove('show');
+
+        // Loading state
+        loginBtn.classList.add('loading');
+        btnText.textContent = 'Memproses...';
+        loginBtn.disabled = true;
+
+        try {
+            // Login dengan Firebase
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log('Login berhasil:', userCredential.user.email);
             
-            if (type === 'text') {
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
-            } else {
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
+            // Redirect ke dashboard
+            alert('Login berhasil! Redirect ke dashboard...');
+            window.location.href = 'dashboard.html';
+            
+        } catch (error) {
+            console.error('Login error:', error);
+            
+            // Show error
+            let errorMsg = 'Login gagal!';
+            if (error.code === 'auth/invalid-credential') {
+                errorMsg = 'Email atau password salah!';
+            } else if (error.code === 'auth/user-not-found') {
+                errorMsg = 'User tidak ditemukan!';
+            } else if (error.code === 'auth/wrong-password') {
+                errorMsg = 'Password salah!';
+            } else if (error.code === 'auth/too-many-requests') {
+                errorMsg = 'Terlalu banyak percobaan. Coba lagi nanti.';
             }
-        });
+            
+            errorText.textContent = errorMsg;
+            errorMessage.classList.add('show');
+            
+            // Remove loading
+            loginBtn.classList.remove('loading');
+            btnText.textContent = 'Masuk';
+            loginBtn.disabled = false;
+        }
+    });
 
-        // Login form handler
-        const loginForm = document.getElementById('loginForm');
-        const loginBtn = document.getElementById('loginBtn');
-        const btnText = document.getElementById('btnText');
-        const errorMessage = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
-        const emailInput = document.getElementById('email');
-
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-        });
-
-        loginBtn.addEventListener('click', async () => {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-
-            // Hide error message
-            errorMessage.classList.remove('show');
-
-            // Validation
-            if (!email || !password) {
-                errorText.textContent = 'Email dan password harus diisi!';
-                errorMessage.classList.add('show');
-                return;
-            }
-
-            // Loading state
-            loginBtn.classList.add('loading');
-            btnText.textContent = 'Memproses...';
-            loginBtn.disabled = true;
-
-            // Simulate API call
-            setTimeout(() => {
-                // Remove loading state
-                loginBtn.classList.remove('loading');
-                btnText.textContent = 'Masuk';
-                loginBtn.disabled = false;
-
-                // Show info message
-                errorText.innerHTML = '<strong>Fitur Login:</strong> Akan diintegrasikan dengan Firebase Authentication. Untuk saat ini, halaman admin masih dalam tahap development.';
-                errorMessage.style.background = '#DBEAFE';
-                errorMessage.style.borderColor = '#93C5FD';
-                errorMessage.style.color = '#1E40AF';
-                errorMessage.classList.add('show');
-
-                console.log('%c🔐 Login Attempt', 'color: #1E40AF; font-size: 16px; font-weight: bold;');
-                console.log('Email:', email);
-                console.log('Status: Fitur dalam pengembangan');
-                console.log('%cFirebase Authentication akan segera diintegrasikan', 'color: #10B981; font-size: 12px;');
-            }, 1500);
-        });
-
-        // Enter key to submit
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                loginBtn.click();
-            }
-        });
-
-        emailInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                passwordInput.focus();
-            }
-        });
-
-        // Console message
-        console.log('%c👨‍💼 Admin Panel', 'color: #1E40AF; font-size: 24px; font-weight: bold;');
-        console.log('%cHalaman: admin.html', 'color: #6B7280; font-size: 14px;');
-        console.log('%cFirebase Integration: Coming Soon', 'color: #F59E0B; font-size: 14px;');
-        console.log('%c\nNext Steps:', 'color: #10B981; font-size: 16px; font-weight: bold;');
-        console.log('1. Setup Firebase Project');
-        console.log('2. Integrate Firebase Authentication');
-        console.log('3. Create Firestore Database');
-        console.log('4. Build Admin Dashboard');
-    </script>
+    // Enter key to submit
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') loginBtn.click();
+    });
+</script>
+    
 </body>
 </html>
