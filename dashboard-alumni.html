@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Alumni - Admin TI UNS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Cloudinary Upload Widget -->
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F9FAFB;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 1);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #1F2937;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #F3F4F6;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #1F2937;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .alumni-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #DBEAFE;
+        }
+
+        .year-badge {
+            background: #D1FAE5;
+            color: #065F46;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit {
+            background: #10B981;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete {
+            background: #EF4444;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-edit:hover {
+            background: #059669;
+        }
+
+        .btn-delete:hover {
+            background: #DC2626;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #1F2937;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6B7280;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        .btn-upload {
+            width: 100%;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6B7280;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6B7280;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .table-container {
+                font-size: 0.85rem;
+            }
+
+            .alumni-img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo-ti.png" alt="Logo TI UNS">
+                <h2>Admin Panel</h2>
+                <p>Teknik Industri UNS</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="dashboard-lab.html"><i class="fas fa-flask"></i> Laboratorium</a></li>
+                <li><a href="dashboard-karya.html"><i class="fas fa-project-diagram"></i> Karya Mahasiswa</a></li>
+                <li><a href="dashboard-mahasiswa.html"><i class="fas fa-trophy"></i> Mahasiswa Berprestasi</a></li>
+                <li><a href="dashboard-alumni.html" class="active"><i class="fas fa-user-graduate"></i> Alumni</a></li>
+            </ul>
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1><i class="fas fa-user-graduate"></i> Kelola Alumni</h1>
+                <button class="btn-primary" id="btnTambah">
+                    <i class="fas fa-plus"></i>
+                    Tambah Alumni
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div id="loadingState" class="loading">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                    <p>Memuat data...</p>
+                </div>
+
+                <div id="tableContainer" style="display: none;">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>Tahun Lulus</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Belum Ada Data Alumni</h3>
+                    <p>Klik tombol "Tambah Alumni" untuk menambahkan data pertama</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Tambah/Edit -->
+    <div class="modal" id="modalAlumni">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tambah Alumni</h2>
+                <button class="btn-close" id="btnCloseModal">&times;</button>
+            </div>
+
+            <form id="formAlumni">
+                <input type="hidden" id="alumniId">
+
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap *</label>
+                    <input type="text" id="nama" required placeholder="Contoh: Dr. Ahmad Fauzi, S.T., M.T.">
+                </div>
+
+                <div class="form-group">
+                    <label for="jabatan">Jabatan/Posisi Saat Ini *</label>
+                    <input type="text" id="jabatan" required placeholder="Contoh: CEO PT Teknologi Indonesia">
+                </div>
+
+                <div class="form-group">
+                    <label for="tahun_lulus">Tahun Lulus *</label>
+                    <select id="tahun_lulus" required>
+                        <option value="">Pilih Tahun</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                        <option value="2010">2010</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cerita">Cerita/Testimoni *</label>
+                    <textarea id="cerita" required placeholder="Ceritakan pengalaman alumni selama kuliah dan karir setelah lulus..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Foto *</label>
+                    <button type="button" class="btn-upload" id="btnUpload">
+                        <i class="fas fa-cloud-upload-alt"></i> Pilih & Upload Foto
+                    </button>
+                    <small style="color: #6B7280; display: block; margin-top: 5px;">
+                        JPG, PNG | Max 10MB | Format potrait untuk hasil terbaik
+                    </small>
+                    
+                    <!-- Image Preview -->
+                    <div id="imagePreview" style="margin-top: 15px; display: none;">
+                        <img id="previewImg" style="max-width: 200px; border-radius: 50%; border: 3px solid #3B82F6;">
+                        <p style="margin-top: 8px; font-size: 0.85rem; color: #10B981;">
+                            <i class="fas fa-check-circle"></i> Foto berhasil diupload!
+                        </p>
+                    </div>
+                    
+                    <input type="hidden" id="gambar_url" required>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnSubmit">
+                    <i class="fas fa-save"></i> Simpan Data
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // ========================================
+        // CLOUDINARY CONFIG - SAMA DENGAN YANG LAIN!
+        // ========================================
+        const CLOUDINARY_CLOUD_NAME = 'ds9q96pu8';      // ← Cloud name kamu!
+        const CLOUDINARY_UPLOAD_PRESET = 'ti-uns-uploads'; // ← Preset yang sama!
+
+        // Initialize Cloudinary Upload Widget
+        let uploadWidget;
+
+        function initCloudinaryWidget() {
+            uploadWidget = cloudinary.createUploadWidget({
+                cloudName: CLOUDINARY_CLOUD_NAME,
+                uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                sources: ['local', 'url', 'camera'],
+                multiple: false,
+                maxFileSize: 10000000, // 10MB
+                clientAllowedFormats: ['jpg', 'jpeg', 'png'],
+                folder: 'ti-uns/alumni', // Folder berbeda!
+                cropping: true, // Enable cropping
+                croppingAspectRatio: 1, // Square 1:1
+                showSkipCropButton: false,
+                styles: {
+                    palette: {
+                        window: "#FFFFFF",
+                        windowBorder: "#3B82F6",
+                        tabIcon: "#3B82F6",
+                        menuIcons: "#1E40AF",
+                        textDark: "#000000",
+                        textLight: "#FFFFFF",
+                        link: "#3B82F6",
+                        action: "#3B82F6",
+                        inactiveTabIcon: "#6B7280",
+                        error: "#EF4444",
+                        inProgress: "#3B82F6",
+                        complete: "#10B981",
+                        sourceBg: "#F9FAFB"
+                    }
+                }
+            }, (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log('✅ Upload successful:', result.info);
+                    
+                    // Set image URL
+                    document.getElementById('gambar_url').value = result.info.secure_url;
+                    
+                    // Show preview
+                    document.getElementById('previewImg').src = result.info.secure_url;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                
+                if (error) {
+                    console.error('❌ Upload error:', error);
+                    alert('Upload gagal: ' + error.message);
+                }
+            });
+        }
+
+        // Check authentication
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'admin.html';
+            } else {
+                initCloudinaryWidget();
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            if (confirm('Yakin ingin logout?')) {
+                await signOut(auth);
+                window.location.href = 'admin.html';
+            }
+        });
+
+        // Elements
+        const modal = document.getElementById('modalAlumni');
+        const btnTambah = document.getElementById('btnTambah');
+        const btnCloseModal = document.getElementById('btnCloseModal');
+        const btnUpload = document.getElementById('btnUpload');
+        const formAlumni = document.getElementById('formAlumni');
+        const modalTitle = document.getElementById('modalTitle');
+        const loadingState = document.getElementById('loadingState');
+        const tableContainer = document.getElementById('tableContainer');
+        const emptyState = document.getElementById('emptyState');
+        const tableBody = document.getElementById('tableBody');
+
+        // Upload button click
+        btnUpload.addEventListener('click', () => {
+            uploadWidget.open();
+        });
+
+        // Load data
+        async function loadAlumni() {
+            try {
+                loadingState.style.display = 'block';
+                tableContainer.style.display = 'none';
+                emptyState.style.display = 'none';
+
+                const querySnapshot = await getDocs(collection(db, 'alumni'));
+                
+                if (querySnapshot.empty) {
+                    loadingState.style.display = 'none';
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    html += `
+                        <tr>
+                            <td><img src="${data.gambar_url}" alt="${data.nama}" class="alumni-img" onerror="this.src='https://via.placeholder.com/60'"></td>
+                            <td><strong>${data.nama}</strong></td>
+                            <td>${data.jabatan}</td>
+                            <td><span class="year-badge">${data.tahun_lulus}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-edit" onclick="editAlumni('${doc.id}')">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn-delete" onclick="deleteAlumni('${doc.id}', '${data.nama}')">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tableBody.innerHTML = html;
+                loadingState.style.display = 'none';
+                tableContainer.style.display = 'block';
+
+                console.log('✅ Data loaded:', querySnapshot.size, 'alumni');
+            } catch (error) {
+                console.error('❌ Error loading data:', error);
+                alert('Gagal memuat data: ' + error.message);
+                loadingState.style.display = 'none';
+            }
+        }
+
+        // Open modal for add
+        btnTambah.addEventListener('click', () => {
+            modalTitle.textContent = 'Tambah Alumni';
+            formAlumni.reset();
+            document.getElementById('alumniId').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+            modal.classList.add('show');
+        });
+
+        // Close modal
+        btnCloseModal.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+        // Submit form
+        formAlumni.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const alumniId = document.getElementById('alumniId').value;
+            const gambarUrl = document.getElementById('gambar_url').value;
+            
+            // Validate image
+            if (!gambarUrl) {
+                alert('❌ Foto belum diupload! Klik tombol "Pilih & Upload Foto"');
+                return;
+            }
+            
+            try {
+                // Disable submit button
+                const submitBtn = document.getElementById('btnSubmit');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+
+                const data = {
+                    nama: document.getElementById('nama').value,
+                    jabatan: document.getElementById('jabatan').value,
+                    tahun_lulus: document.getElementById('tahun_lulus').value,
+                    cerita: document.getElementById('cerita').value,
+                    gambar_url: gambarUrl,
+                    updated_at: serverTimestamp()
+                };
+
+                if (alumniId) {
+                    // Update
+                    await updateDoc(doc(db, 'alumni', alumniId), data);
+                    alert('✅ Data alumni berhasil diupdate!');
+                } else {
+                    // Add new
+                    data.created_at = serverTimestamp();
+                    await addDoc(collection(db, 'alumni'), data);
+                    alert('✅ Data alumni berhasil ditambahkan!');
+                }
+
+                modal.classList.remove('show');
+                loadAlumni();
+                
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Data';
+            } catch (error) {
+                console.error('❌ Error saving:', error);
+                alert('Gagal menyimpan: ' + error.message);
+                
+                // Reset button
+                const submitBtn = document.getElementById('btnSubmit');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Data';
+            }
+        });
+
+        // Edit function
+        window.editAlumni = async (id) => {
+            try {
+                const docSnap = await getDocs(collection(db, 'alumni'));
+                let alumniData = null;
+                
+                docSnap.forEach((doc) => {
+                    if (doc.id === id) {
+                        alumniData = { id: doc.id, ...doc.data() };
+                    }
+                });
+
+                if (alumniData) {
+                    modalTitle.textContent = 'Edit Alumni';
+                    document.getElementById('alumniId').value = alumniData.id;
+                    document.getElementById('nama').value = alumniData.nama;
+                    document.getElementById('jabatan').value = alumniData.jabatan;
+                    document.getElementById('tahun_lulus').value = alumniData.tahun_lulus;
+                    document.getElementById('cerita').value = alumniData.cerita;
+                    document.getElementById('gambar_url').value = alumniData.gambar_url;
+                    
+                    // Show existing image preview
+                    if (alumniData.gambar_url) {
+                        document.getElementById('previewImg').src = alumniData.gambar_url;
+                        document.getElementById('imagePreview').style.display = 'block';
+                    }
+                    
+                    modal.classList.add('show');
+                }
+            } catch (error) {
+                console.error('❌ Error loading data:', error);
+                alert('Gagal memuat data');
+            }
+        };
+
+        // Delete function
+        window.deleteAlumni = async (id, nama) => {
+            if (confirm(`Yakin ingin menghapus data alumni "${nama}"?`)) {
+                try {
+                    await deleteDoc(doc(db, 'alumni', id));
+                    alert('✅ Data alumni berhasil dihapus!');
+                    loadAlumni();
+                } catch (error) {
+                    console.error('❌ Error deleting:', error);
+                    alert('Gagal menghapus: ' + error.message);
+                }
+            }
+        };
+
+        // Initial load
+        loadAlumni();
+    </script>
+</body>
+</html>

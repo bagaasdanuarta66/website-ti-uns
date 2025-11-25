@@ -33,6 +33,14 @@
 
         .sidebar-header {
             margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
         }
 
         .sidebar-header h2 {
@@ -135,6 +143,25 @@
             font-weight: bold;
         }
 
+        .welcome-message {
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .welcome-message h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-message p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -147,6 +174,42 @@
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon.blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+        }
+
+        .stat-icon.green {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22C55E;
+        }
+
+        .stat-icon.yellow {
+            background: rgba(234, 179, 8, 0.1);
+            color: #EAB308;
+        }
+
+        .stat-icon.purple {
+            background: rgba(168, 85, 247, 0.1);
+            color: #A855F7;
         }
 
         .stat-card h3 {
@@ -181,41 +244,71 @@
             color: #1F2937;
         }
 
-        .btn-add {
-            background: linear-gradient(135deg, #1E40AF, #3B82F6);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.3s;
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        .btn-add:hover {
-            transform: translateY(-2px);
-        }
-
-        .welcome-message {
-            background: linear-gradient(135deg, #1E40AF, #3B82F6);
-            color: white;
-            padding: 40px;
+        .action-card {
+            background: linear-gradient(135deg, #F3F4F6, #E5E7EB);
+            padding: 30px;
             border-radius: 12px;
-            margin-bottom: 30px;
             text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
-        .welcome-message h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
-        .welcome-message p {
+        .action-card i {
+            font-size: 2.5rem;
+            color: #3B82F6;
+            margin-bottom: 15px;
+        }
+
+        .action-card h3 {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+
+        .action-card p {
+            font-size: 0.85rem;
+            color: #6B7280;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .stats-grid,
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -224,18 +317,17 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
+                <img src="assets/logo-ti.png" alt="Logo TI UNS">
                 <h2>Admin Panel</h2>
                 <p>Teknik Industri UNS</p>
             </div>
 
             <ul class="sidebar-menu">
-                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-newspaper"></i> Berita</a></li>
-                <li><a href="#"><i class="fas fa-flask"></i> Laboratorium</a></li>
-                <li><a href="#"><i class="fas fa-project-diagram"></i> Karya</a></li>
-                <li><a href="#"><i class="fas fa-trophy"></i> Mahasiswa</a></li>
-                <li><a href="#"><i class="fas fa-user-graduate"></i> Alumni</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="dashboard-lab.html"><i class="fas fa-flask"></i> Laboratorium</a></li>
+                <li><a href="dashboard-karya.html"><i class="fas fa-project-diagram"></i> Karya Mahasiswa</a></li>
+                <li><a href="dashboard-mahasiswa.html"><i class="fas fa-trophy"></i> Mahasiswa Berprestasi</a></li>
+                <li><a href="dashboard-alumni.html"><i class="fas fa-user-graduate"></i> Alumni</a></li>
             </ul>
 
             <button class="logout-btn" id="logoutBtn">
@@ -264,66 +356,128 @@
                 <p>Kelola konten website Teknik Industri UNS dengan mudah</p>
             </div>
 
+            <!-- Stats Cards -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Total Berita</h3>
-                    <div class="number">0</div>
-                    <p style="font-size: 0.85rem; color: #10B981;">+0 bulan ini</p>
+                    <div class="stat-icon blue">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Total Laboratorium</h3>
+                    <div class="number" id="totalLab">0</div>
+                    <p style="font-size: 0.85rem; color: #6B7280;">Lab aktif</p>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
                     <h3>Total Karya</h3>
-                    <div class="number">0</div>
-                    <p style="font-size: 0.85rem; color: #10B981;">+0 bulan ini</p>
+                    <div class="number" id="totalKarya">0</div>
+                    <p style="font-size: 0.85rem; color: #6B7280;">Karya mahasiswa</p>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-trophy"></i>
+                    </div>
                     <h3>Mahasiswa Berprestasi</h3>
-                    <div class="number">0</div>
-                    <p style="font-size: 0.85rem; color: #10B981;">+0 bulan ini</p>
+                    <div class="number" id="totalMahasiswa">0</div>
+                    <p style="font-size: 0.85rem; color: #6B7280;">Prestasi tercatat</p>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
                     <h3>Alumni Terdaftar</h3>
-                    <div class="number">0</div>
-                    <p style="font-size: 0.85rem; color: #10B981;">+0 bulan ini</p>
+                    <div class="number" id="totalAlumni">0</div>
+                    <p style="font-size: 0.85rem; color: #6B7280;">Alumni aktif</p>
                 </div>
             </div>
 
+            <!-- Quick Actions -->
             <div class="content-section">
                 <div class="section-header">
-                    <h2>Aktivitas Terbaru</h2>
-                    <button class="btn-add">
-                        <i class="fas fa-plus"></i>
-                        Tambah Konten
-                    </button>
+                    <h2>Kelola Konten</h2>
                 </div>
-                <p style="color: #6B7280;">Belum ada aktivitas. Mulai tambahkan konten pertama Anda!</p>
+                <div class="quick-actions">
+                    <a href="dashboard-lab.html" class="action-card">
+                        <i class="fas fa-flask"></i>
+                        <h3>Laboratorium</h3>
+                        <p>Kelola data laboratorium</p>
+                    </a>
+                    <a href="dashboard-karya.html" class="action-card">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Karya Mahasiswa</h3>
+                        <p>Tambah & edit karya</p>
+                    </a>
+                    <a href="dashboard-mahasiswa.html" class="action-card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Mahasiswa Berprestasi</h3>
+                        <p>Catat prestasi mahasiswa</p>
+                    </a>
+                    <a href="dashboard-alumni.html" class="action-card">
+                        <i class="fas fa-user-graduate"></i>
+                        <h3>Alumni</h3>
+                        <p>Kelola data alumni</p>
+                    </a>
+                </div>
             </div>
         </main>
     </div>
 
     <script type="module">
-        import { auth, signOut, onAuthStateChanged } from './firebase-config.js';
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // Check if user is logged in
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 // User logged in
                 document.getElementById('userEmail').textContent = user.email;
-                console.log('User logged in:', user.email);
+                console.log('✅ User logged in:', user.email);
+
+                // Load stats
+                await loadStats();
             } else {
                 // No user, redirect to login
                 window.location.href = 'admin.html';
             }
         });
 
+        // Load statistics from Firestore
+        async function loadStats() {
+            try {
+                // Count Laboratorium
+                const labSnapshot = await getDocs(collection(db, 'laboratorium'));
+                document.getElementById('totalLab').textContent = labSnapshot.size;
+
+                // Count Karya
+                const karyaSnapshot = await getDocs(collection(db, 'karya'));
+                document.getElementById('totalKarya').textContent = karyaSnapshot.size;
+
+                // Count Mahasiswa Berprestasi
+                const mahasiswaSnapshot = await getDocs(collection(db, 'mahasiswa_berprestasi'));
+                document.getElementById('totalMahasiswa').textContent = mahasiswaSnapshot.size;
+
+                // Count Alumni
+                const alumniSnapshot = await getDocs(collection(db, 'alumni'));
+                document.getElementById('totalAlumni').textContent = alumniSnapshot.size;
+
+                console.log('✅ Stats loaded successfully');
+            } catch (error) {
+                console.error('❌ Error loading stats:', error);
+                // Keep showing 0 if error
+            }
+        }
+
         // Logout button
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             if (confirm('Yakin ingin logout?')) {
                 try {
                     await signOut(auth);
-                    alert('Logout berhasil!');
+                    console.log('✅ Logout successful');
                     window.location.href = 'admin.html';
                 } catch (error) {
-                    console.error('Logout error:', error);
+                    console.error('❌ Logout error:', error);
                     alert('Logout gagal: ' + error.message);
                 }
             }

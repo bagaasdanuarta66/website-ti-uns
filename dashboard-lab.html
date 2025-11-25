@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Laboratorium - Admin TI UNS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Cloudinary Upload Widget -->
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F9FAFB;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .sidebar-header img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            filter: brightness(0) invert(1);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .logout-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 1);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #1F2937;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #F3F4F6;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #1F2937;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .lab-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #E5E7EB;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit {
+            background: #10B981;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete {
+            background: #EF4444;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-edit:hover {
+            background: #059669;
+        }
+
+        .btn-delete:hover {
+            background: #DC2626;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #1F2937;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6B7280;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #1E40AF, #3B82F6);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        .btn-upload {
+            width: 100%;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .image-preview {
+            margin-top: 15px;
+            padding: 20px;
+            background: #F3F4F6;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .image-preview img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid #3B82F6;
+            margin-bottom: 10px;
+        }
+
+        .image-preview p {
+            color: #10B981;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6B7280;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6B7280;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .table-container {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/logo-ti.png" alt="Logo TI UNS">
+                <h2>Admin Panel</h2>
+                <p>Teknik Industri UNS</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="dashboard-lab.html" class="active"><i class="fas fa-flask"></i> Laboratorium</a></li>
+                <li><a href="dashboard-karya.html"><i class="fas fa-project-diagram"></i> Karya Mahasiswa</a></li>
+                <li><a href="dashboard-mahasiswa.html"><i class="fas fa-trophy"></i> Mahasiswa Berprestasi</a></li>
+                <li><a href="dashboard-alumni.html"><i class="fas fa-user-graduate"></i> Alumni</a></li>
+            </ul>
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1><i class="fas fa-flask"></i> Kelola Laboratorium</h1>
+                <button class="btn-primary" id="btnTambah">
+                    <i class="fas fa-plus"></i>
+                    Tambah Lab
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div id="loadingState" class="loading">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                    <p>Memuat data...</p>
+                </div>
+
+                <div id="tableContainer" style="display: none;">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Logo</th>
+                                    <th>Nama Lab</th>
+                                    <th>Deskripsi</th>
+                                    <th>Link Website</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-flask"></i>
+                    <h3>Belum Ada Data Laboratorium</h3>
+                    <p>Klik tombol "Tambah Lab" untuk menambahkan laboratorium pertama</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Tambah/Edit -->
+    <div class="modal" id="modalLab">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tambah Laboratorium</h2>
+                <button class="btn-close" id="btnCloseModal">&times;</button>
+            </div>
+
+            <form id="formLab">
+                <input type="hidden" id="labId">
+
+                <div class="form-group">
+                    <label for="nama">Nama Singkat *</label>
+                    <input type="text" id="nama" required placeholder="Contoh: LPSKE">
+                    <small style="color: #6B7280;">Nama pendek/singkatan laboratorium</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_lengkap">Nama Lengkap *</label>
+                    <input type="text" id="nama_lengkap" required placeholder="Contoh: Lab Perancangan Sistem Kerja dan Ergonomi">
+                </div>
+
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi *</label>
+                    <textarea id="deskripsi" required placeholder="Deskripsi singkat tentang laboratorium..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Logo Lab *</label>
+                    <button type="button" class="btn-upload" id="btnUpload">
+                        <i class="fas fa-cloud-upload-alt"></i> Pilih & Upload Logo
+                    </button>
+                    <small style="color: #6B7280; display: block; margin-top: 5px;">
+                        PNG dengan background transparan untuk hasil terbaik | Max 10MB
+                    </small>
+                    
+                    <!-- Image Preview -->
+                    <div id="imagePreview" class="image-preview">
+                        <img id="previewImg">
+                        <p><i class="fas fa-check-circle"></i> Logo berhasil diupload!</p>
+                    </div>
+                    
+                    <input type="hidden" id="gambar_url" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="link">Link Website Lab *</label>
+                    <input type="text" id="link" required placeholder="https://lpske.ti.uns.ac.id">
+                    <small style="color: #6B7280;">URL lengkap website laboratorium</small>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnSubmit">
+                    <i class="fas fa-save"></i> Simpan Lab
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // ========================================
+        // CLOUDINARY CONFIG
+        // ========================================
+        const CLOUDINARY_CLOUD_NAME = 'ds9q96pu8';
+        const CLOUDINARY_UPLOAD_PRESET = 'ti-uns-uploads';
+
+        // Initialize Cloudinary Upload Widget
+        let uploadWidget;
+
+        function initCloudinaryWidget() {
+            uploadWidget = cloudinary.createUploadWidget({
+                cloudName: CLOUDINARY_CLOUD_NAME,
+                uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+                sources: ['local', 'url'],
+                multiple: false,
+                maxFileSize: 10000000,
+                clientAllowedFormats: ['jpg', 'jpeg', 'png'],
+                folder: 'ti-uns/lab',
+                cropping: false,
+                styles: {
+                    palette: {
+                        window: "#FFFFFF",
+                        windowBorder: "#3B82F6",
+                        tabIcon: "#3B82F6",
+                        menuIcons: "#1E40AF",
+                        textDark: "#000000",
+                        textLight: "#FFFFFF",
+                        link: "#3B82F6",
+                        action: "#3B82F6",
+                        inactiveTabIcon: "#6B7280",
+                        error: "#EF4444",
+                        inProgress: "#3B82F6",
+                        complete: "#10B981",
+                        sourceBg: "#F9FAFB"
+                    }
+                }
+            }, (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log('✅ Upload successful:', result.info);
+                    document.getElementById('gambar_url').value = result.info.secure_url;
+                    document.getElementById('previewImg').src = result.info.secure_url;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                if (error) {
+                    console.error('❌ Upload error:', error);
+                    alert('Upload gagal: ' + error.message);
+                }
+            });
+        }
+
+        // Check authentication
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'admin.html';
+            } else {
+                initCloudinaryWidget();
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            if (confirm('Yakin ingin logout?')) {
+                await signOut(auth);
+                window.location.href = 'admin.html';
+            }
+        });
+
+        // Elements
+        const modal = document.getElementById('modalLab');
+        const btnTambah = document.getElementById('btnTambah');
+        const btnCloseModal = document.getElementById('btnCloseModal');
+        const btnUpload = document.getElementById('btnUpload');
+        const formLab = document.getElementById('formLab');
+        const modalTitle = document.getElementById('modalTitle');
+        const loadingState = document.getElementById('loadingState');
+        const tableContainer = document.getElementById('tableContainer');
+        const emptyState = document.getElementById('emptyState');
+        const tableBody = document.getElementById('tableBody');
+
+        // Upload button click
+        btnUpload.addEventListener('click', () => {
+            uploadWidget.open();
+        });
+
+        // Load data
+        async function loadLab() {
+            try {
+                loadingState.style.display = 'block';
+                tableContainer.style.display = 'none';
+                emptyState.style.display = 'none';
+
+                const querySnapshot = await getDocs(collection(db, 'laboratorium'));
+                
+                if (querySnapshot.empty) {
+                    loadingState.style.display = 'none';
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                let html = '';
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    html += `
+                        <tr>
+                            <td>
+                                <img src="${data.gambar_url}" alt="${data.nama}" class="lab-icon" onerror="this.src='https://via.placeholder.com/60'">
+                            </td>
+                            <td>
+                                <strong>${data.nama}</strong><br>
+                                <small style="color: #6B7280;">${data.nama_lengkap}</small>
+                            </td>
+                            <td>${data.deskripsi}</td>
+                            <td><a href="${data.link}" target="_blank" style="color: #3B82F6; text-decoration: none;">🔗 Website</a></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-edit" onclick="editLab('${doc.id}')">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn-delete" onclick="deleteLab('${doc.id}', '${data.nama}')">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tableBody.innerHTML = html;
+                loadingState.style.display = 'none';
+                tableContainer.style.display = 'block';
+
+                console.log('✅ Data loaded:', querySnapshot.size, 'lab');
+            } catch (error) {
+                console.error('❌ Error loading data:', error);
+                alert('Gagal memuat data: ' + error.message);
+                loadingState.style.display = 'none';
+            }
+        }
+
+        // Open modal for add
+        btnTambah.addEventListener('click', () => {
+            modalTitle.textContent = 'Tambah Laboratorium';
+            formLab.reset();
+            document.getElementById('labId').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+            modal.classList.add('show');
+        });
+
+        // Close modal
+        btnCloseModal.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+        // Submit form
+        formLab.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const labId = document.getElementById('labId').value;
+            const gambarUrl = document.getElementById('gambar_url').value;
+            
+            // Validate image
+            if (!gambarUrl) {
+                alert('❌ Logo belum diupload! Klik tombol "Pilih & Upload Logo"');
+                return;
+            }
+            
+            try {
+                // Disable submit button
+                const submitBtn = document.getElementById('btnSubmit');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+
+                const data = {
+                    nama: document.getElementById('nama').value,
+                    nama_lengkap: document.getElementById('nama_lengkap').value,
+                    deskripsi: document.getElementById('deskripsi').value,
+                    gambar_url: gambarUrl,
+                    link: document.getElementById('link').value,
+                    updated_at: serverTimestamp()
+                };
+
+                if (labId) {
+                    // Update
+                    await updateDoc(doc(db, 'laboratorium', labId), data);
+                    alert('✅ Data lab berhasil diupdate!');
+                } else {
+                    // Add new
+                    data.created_at = serverTimestamp();
+                    await addDoc(collection(db, 'laboratorium'), data);
+                    alert('✅ Lab berhasil ditambahkan!');
+                }
+
+                modal.classList.remove('show');
+                loadLab();
+                
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Lab';
+            } catch (error) {
+                console.error('❌ Error saving:', error);
+                alert('Gagal menyimpan: ' + error.message);
+                
+                // Reset button
+                const submitBtn = document.getElementById('btnSubmit');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Simpan Lab';
+            }
+        });
+
+        // Edit function
+        window.editLab = async (id) => {
+            try {
+                const docSnap = await getDocs(collection(db, 'laboratorium'));
+                let labData = null;
+                
+                docSnap.forEach((doc) => {
+                    if (doc.id === id) {
+                        labData = { id: doc.id, ...doc.data() };
+                    }
+                });
+
+                if (labData) {
+                    modalTitle.textContent = 'Edit Laboratorium';
+                    document.getElementById('labId').value = labData.id;
+                    document.getElementById('nama').value = labData.nama;
+                    document.getElementById('nama_lengkap').value = labData.nama_lengkap;
+                    document.getElementById('deskripsi').value = labData.deskripsi;
+                    document.getElementById('gambar_url').value = labData.gambar_url;
+                    document.getElementById('link').value = labData.link;
+                    
+                    // Show existing image preview
+                    if (labData.gambar_url) {
+                        document.getElementById('previewImg').src = labData.gambar_url;
+                        document.getElementById('imagePreview').style.display = 'block';
+                    }
+                    
+                    modal.classList.add('show');
+                }
+            } catch (error) {
+                console.error('❌ Error loading data:', error);
+                alert('Gagal memuat data');
+            }
+        };
+
+        // Delete function
+        window.deleteLab = async (id, nama) => {
+            if (confirm(`Yakin ingin menghapus laboratorium "${nama}"?`)) {
+                try {
+                    await deleteDoc(doc(db, 'laboratorium', id));
+                    alert('✅ Lab berhasil dihapus!');
+                    loadLab();
+                } catch (error) {
+                    console.error('❌ Error deleting:', error);
+                    alert('Gagal menghapus: ' + error.message);
+                }
+            }
+        };
+
+        // Initial load
+        loadLab();
+    </script>
+</body>
+</html>
