@@ -135,9 +135,6 @@ async function loadKarya() {
                         <h3>${data.judul}</h3>
                         <p class="karya-author"><i class="fas fa-user"></i> ${data.author}</p>
                         <p class="karya-desc">${data.deskripsi}</p>
-                        <a href="${data.link}" class="karya-link" ${data.link === '#' ? 'style="pointer-events:none; opacity:0.5;"' : 'target="_blank"'}>
-                            Lihat Detail <i class="fas fa-arrow-right"></i>
-                        </a>
                     </div>
                 </div>
             `;
@@ -233,8 +230,8 @@ async function loadLab() {
             html += `
                 <a href="${data.link}" target="_blank" class="lab-card-link">
                     <div class="lab-card-new">
-                        <div class="lab-logo">
-                            <img src="${data.gambar_url}" alt="${data.nama}" onerror="this.src='https://via.placeholder.com/120'" style="width: 80px; height: 80px; object-fit: contain;">
+                        <div class="lab-logo" style="background: transparent;">
+                            <img src="${data.gambar_url}" alt="${data.nama}" onerror="this.src='https://via.placeholder.com/120'" style="width: 100px; height: 100px; object-fit: contain; background: transparent;">
                         </div>
                         <h3>${data.nama}</h3>
                         <h4>${data.nama_lengkap}</h4>
@@ -280,7 +277,9 @@ async function loadAlumni() {
             html += `
                 <div class="alumni-card">
                     <div class="alumni-avatar">
-                        <img src="${data.gambar_url}" alt="${data.nama}" onerror="this.src='https://via.placeholder.com/300'">
+                        <img src="${data.gambar_url}" alt="${data.nama}" 
+                             onerror="this.src='https://via.placeholder.com/100'" 
+                             style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                     </div>
                     <div class="alumni-info">
                         <h3>${data.nama}</h3>
