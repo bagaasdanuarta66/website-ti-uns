@@ -774,17 +774,53 @@ section {
     box-shadow: var(--shadow-lg);
 }
 
+/* =======================================
+   CSS FIX - ALUMNI AVATAR DENGAN GAMBAR
+   ======================================= */
+
+/* Alumni Avatar - Support untuk IMG tag */
 .alumni-avatar {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #3B82F6, #1E40AF);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
-    font-size: 3rem;
+    margin-right: 20px;
     flex-shrink: 0;
+    overflow: hidden; /* PENTING: Agar img tidak keluar dari circle */
+    position: relative;
+}
+
+/* Icon Font Awesome (fallback untuk data lama) */
+.alumni-avatar i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* IMG tag - untuk foto alumni dari Firestore */
+.alumni-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .alumni-avatar {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+    }
+    
+    .alumni-avatar i {
+        font-size: 1.8rem;
+    }
 }
 
 .alumni-info h3 {
