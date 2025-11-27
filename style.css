@@ -12,6 +12,7 @@
     --text-dark: #1F2937;
     --text-light: #6B7280;
     --bg-light: #F9FAFB;
+    --bg-alt: #F3F4F6; /* lighter gray for softer contrast */
     --white: #FFFFFF;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -102,7 +103,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 20px; /* INCREASED padding untuk navbar lebih tinggi */
+    padding: 1.6rem 20px; /* INCREASED padding untuk navbar lebih tinggi */
 }
 
 .logo {
@@ -120,8 +121,8 @@ nav {
 }
 
 .logo-circle {
-    width: 60px; /* INCREASED dari 45px */
-    height: 60px; /* INCREASED dari 45px */
+    width: 72px; /* Larger logo circle */
+    height: 72px; /* Larger logo circle */
     background: transparent; /* REMOVED white background */
     border-radius: 50%;
     display: flex;
@@ -149,19 +150,19 @@ nav {
 
 .logo-title {
     font-weight: 700;
-    font-size: 1.15rem; /* Slightly larger */
+    font-size: 1.3rem; /* Larger */
     color: var(--primary-color);
 }
 
 .logo-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-light);
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 2.2rem;
 }
 
 .nav-link {
@@ -170,7 +171,7 @@ nav {
     font-weight: 500;
     transition: color 0.3s;
     position: relative;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .nav-link::after {
@@ -234,7 +235,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 100px 20px 60px; /* Adjusted for taller navbar */
+    padding: 120px 20px 60px; /* Adjusted for taller navbar */
 }
 
 .hero-overlay {
@@ -315,7 +316,9 @@ nav {
 /* Stats Section */
 .stats-section {
     padding: 60px 20px;
-    background: var(--bg-light);
+    background: var(--bg-alt);
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .stats-grid {
@@ -364,8 +367,22 @@ section {
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 4px;
+    background: var(--secondary-color);
+    border-radius: 999px;
+    margin: 12px auto 0;
 }
 
 .section-subtitle {
@@ -461,7 +478,7 @@ section {
 
 /* Lab Section - REVISED: New card design with clickable logos */
 .lab-section {
-    background: var(--bg-light);
+    background: var(--white);
 }
 
 .lab-grid {
@@ -538,7 +555,9 @@ section {
 
 /* Karya Section - REVISED: Horizontal Slider with Arrow Buttons */
 .karya-section {
-    background: var(--white);
+    background: var(--bg-alt);
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .slider-container {
@@ -672,7 +691,7 @@ section {
 
 /* Mahasiswa Section - REVISED: Horizontal Slider with Arrow Buttons */
 .mahasiswa-section {
-    background: var(--bg-light);
+    background: var(--white);
 }
 
 .mahasiswa-slider {
@@ -748,8 +767,10 @@ section {
 
 /* Alumni Section */
 .alumni-section {
-    background: var(--white);
+    background: var(--bg-alt);
     padding-bottom: 80px; /* Reduced padding since CTA is removed */
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .alumni-list {
@@ -1003,17 +1024,17 @@ section {
     }
 
     nav {
-        padding: 1rem 20px;
+        padding: 1.2rem 20px;
     }
 
     .logo-circle {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
 
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 85px;
         right: -100%;
         flex-direction: column;
         background: var(--white);
