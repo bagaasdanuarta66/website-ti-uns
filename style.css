@@ -12,7 +12,7 @@
     --text-dark: #1F2937;
     --text-light: #6B7280;
     --bg-light: #F9FAFB;
-    --bg-alt: #F3F4F6; /* lighter gray for softer contrast */
+    --bg-alt: #F3F4F6;
     --white: #FFFFFF;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -81,7 +81,7 @@ html {
     100% { transform: rotate(360deg); }
 }
 
-/* Header - REVISED: Larger navbar, bigger logo, no white circle */
+/* Header */
 header {
     position: fixed;
     top: 0;
@@ -103,7 +103,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.6rem 20px; /* INCREASED padding untuk navbar lebih tinggi */
+    padding: 1.6rem 20px;
 }
 
 .logo {
@@ -115,15 +115,14 @@ nav {
     transition: transform 0.3s ease;
 }
 
-/* HOVER EFFECT - Logo "maju ke depan" */
 .logo:hover {
     transform: scale(1.05) translateY(-3px);
 }
 
 .logo-circle {
-    width: 72px; /* Larger logo circle */
-    height: 72px; /* Larger logo circle */
-    background: transparent; /* REMOVED white background */
+    width: 72px;
+    height: 72px;
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -150,7 +149,7 @@ nav {
 
 .logo-title {
     font-weight: 700;
-    font-size: 1.3rem; /* Larger */
+    font-size: 1.3rem;
     color: var(--primary-color);
 }
 
@@ -224,18 +223,19 @@ nav {
     transform: rotate(-45deg) translate(8px, -8px);
 }
 
-/* Hero Section - REVISED: Background gedung-uns.jpg, no white circle */
+/* Hero Section */
 .hero {
     min-height: 100vh;
-    background-image: url('assets/gedung-uns.jpg'); /* CHANGED from gradient */
+    background-image: url('assets/gedung-uns.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px 20px 60px; /* Adjusted for taller navbar */
+    padding: 120px 20px 60px;
 }
 
 .hero-overlay {
@@ -244,7 +244,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
@@ -261,18 +261,17 @@ nav {
     width: 200px;
     height: 200px;
     margin: 0 auto 30px;
-    background: transparent; /* REMOVED white background */
+    background: transparent;
     border-radius: 50%;
     padding: 0;
     animation: zoomIn 0.8s ease-out;
-    cursor: pointer; /* Make it clear it's interactive */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Smooth transition */
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* HOVER EFFECT - Logo "maju ke depan" */
 .hero-logo:hover {
-    transform: scale(1.15) translateZ(20px); /* Scale up + move forward */
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8)); /* Stronger shadow on hover */
+    transform: scale(1.15) translateZ(20px);
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8));
 }
 
 .hero-logo img {
@@ -280,10 +279,9 @@ nav {
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
-    transition: transform 0.3s ease; /* Smooth image transition */
+    transition: transform 0.3s ease;
 }
 
-/* Rotate slightly on hover for dynamic effect */
 .hero-logo:hover img {
     transform: rotate(5deg);
 }
@@ -476,7 +474,7 @@ section {
     margin-bottom: 10px;
 }
 
-/* Lab Section - REVISED: New card design with clickable logos */
+/* Lab Section */
 .lab-section {
     background: var(--white);
 }
@@ -515,7 +513,7 @@ section {
 .lab-logo {
     width: 120px;
     height: 120px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -530,7 +528,7 @@ section {
 
 .lab-logo i {
     font-size: 4rem;
-    color: var(--white);
+    color: var(--primary-color);
 }
 
 .lab-card-new h3 {
@@ -553,7 +551,7 @@ section {
     flex-grow: 1;
 }
 
-/* Karya Section - REVISED: Horizontal Slider with Arrow Buttons */
+/* Karya Section - Horizontal Slider */
 .karya-section {
     background: var(--bg-alt);
     border-top: 1px solid #e5e7eb;
@@ -689,7 +687,7 @@ section {
     gap: 12px;
 }
 
-/* Mahasiswa Section - REVISED: Horizontal Slider with Arrow Buttons */
+/* Mahasiswa Section - Horizontal Slider */
 .mahasiswa-section {
     background: var(--white);
 }
@@ -768,7 +766,7 @@ section {
 /* Alumni Section */
 .alumni-section {
     background: var(--bg-alt);
-    padding-bottom: 80px; /* Reduced padding since CTA is removed */
+    padding-bottom: 80px;
     border-top: 1px solid #e5e7eb;
     border-bottom: 1px solid #e5e7eb;
 }
@@ -777,17 +775,18 @@ section {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    margin-bottom: 0; /* Removed margin since CTA is gone */
+    margin-bottom: 0;
 }
 
 .alumni-card {
-    background: var(--bg-light);
+    background: var(--white);
     padding: 30px;
     border-radius: 15px;
     display: flex;
     gap: 30px;
     align-items: start;
     transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--shadow);
 }
 
 .alumni-card:hover {
@@ -795,11 +794,6 @@ section {
     box-shadow: var(--shadow-lg);
 }
 
-/* =======================================
-   CSS FIX - ALUMNI AVATAR DENGAN GAMBAR
-   ======================================= */
-
-/* Alumni Avatar - Support untuk IMG tag */
 .alumni-avatar {
     width: 80px;
     height: 80px;
@@ -808,19 +802,16 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 20px;
     flex-shrink: 0;
-    overflow: hidden; /* PENTING: Agar img tidak keluar dari circle */
+    overflow: hidden;
     position: relative;
 }
 
-/* Icon Font Awesome (fallback untuk data lama) */
 .alumni-avatar i {
     font-size: 2.5rem;
     color: white;
 }
 
-/* IMG tag - untuk foto alumni dari Firestore */
 .alumni-avatar img {
     width: 100%;
     height: 100%;
@@ -829,19 +820,6 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-/* Responsive - Mobile */
-@media (max-width: 768px) {
-    .alumni-avatar {
-        width: 60px;
-        height: 60px;
-        margin-right: 15px;
-    }
-    
-    .alumni-avatar i {
-        font-size: 1.8rem;
-    }
 }
 
 .alumni-info h3 {
@@ -867,50 +845,11 @@ section {
     line-height: 1.8;
 }
 
-.alumni-cta {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    padding: 50px;
-    border-radius: 20px;
-    text-align: center;
-    color: var(--white);
-    display: none; /* HIDDEN - Per user request */
-}
-
-.alumni-cta h3 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.alumni-cta p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    opacity: 0.9;
-}
-
-.btn {
-    padding: 14px 32px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-    display: inline-block;
-}
-
-.btn-primary {
-    background: var(--white);
-    color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
 /* Footer */
 .footer {
     background: var(--text-dark);
     color: var(--white);
-    padding: 80px 20px 30px; /* Increased top padding for better spacing */
+    padding: 80px 20px 30px;
 }
 
 .footer-content {
@@ -1007,7 +946,11 @@ section {
     }
 }
 
-/* Responsive Design */
+/* ============================================
+   MOBILE RESPONSIVE - CRITICAL FIXES
+   ============================================ */
+
+/* Tablet & Below */
 @media (max-width: 1024px) {
     .karya-card {
         min-width: calc(100% - 30px);
@@ -1018,7 +961,9 @@ section {
     }
 }
 
+/* Mobile Devices */
 @media (max-width: 768px) {
+    /* Navigation */
     .hamburger {
         display: flex;
     }
@@ -1030,6 +975,14 @@ section {
     .logo-circle {
         width: 60px;
         height: 60px;
+    }
+
+    .logo-title {
+        font-size: 1.1rem;
+    }
+
+    .logo-subtitle {
+        font-size: 0.8rem;
     }
 
     .nav-links {
@@ -1049,6 +1002,16 @@ section {
         right: 0;
     }
 
+    /* ============================================
+       FIX: HERO SECTION - GAMBAR GEDUNG UNS
+       ============================================ */
+    .hero {
+        background-attachment: scroll; /* FIX: Mobile tidak support fixed */
+        background-position: center center;
+        min-height: 80vh;
+        padding: 100px 20px 40px;
+    }
+
     .hero-logo {
         width: 150px;
         height: 150px;
@@ -1057,10 +1020,12 @@ section {
 
     .hero-title {
         font-size: 2rem;
+        margin-bottom: 15px;
     }
 
     .hero-description {
         font-size: 1.5rem;
+        margin-bottom: 10px;
     }
 
     .hero-tagline {
@@ -1068,17 +1033,97 @@ section {
         letter-spacing: 1px;
     }
 
+    /* Stats */
+    .stats-section {
+        padding: 40px 15px;
+    }
+
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 
-    .about-content,
-    .lab-grid,
-    .achievement-grid,
-    .footer-content {
+    .stat-card {
+        padding: 20px 15px;
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+
+    /* Section Spacing */
+    section {
+        padding: 50px 15px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+
+    /* About */
+    .about-content {
         grid-template-columns: 1fr;
+        gap: 25px;
     }
 
+    .about-card {
+        padding: 25px;
+    }
+
+    .achievement-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Lab */
+    .lab-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .lab-card-new {
+        padding: 25px 20px;
+    }
+
+    .lab-logo {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .lab-logo i {
+        font-size: 3rem;
+    }
+
+    .lab-card-new h3 {
+        font-size: 1.4rem;
+    }
+
+    .lab-card-new h4 {
+        font-size: 1rem;
+    }
+
+    .lab-card-new p {
+        font-size: 0.9rem;
+    }
+
+    /* ============================================
+       FIX: KARYA MAHASISWA - SLIDER MOBILE
+       ============================================ */
     .slider-container {
         padding: 0 50px;
     }
@@ -1089,12 +1134,170 @@ section {
         font-size: 1.2rem;
     }
 
-    .karya-card,
+    .prev-btn {
+        left: 5px;
+    }
+
+    .next-btn {
+        right: 5px;
+    }
+
+    .karya-slider {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 20px;
+        padding: 20px 5px;
+    }
+
+    .karya-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .karya-card {
+        min-width: 85%;
+        max-width: 85%;
+        scroll-snap-align: center;
+    }
+
+    .karya-image {
+        height: 200px;
+    }
+
+    .karya-content {
+        padding: 20px;
+    }
+
+    .karya-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .karya-author {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .karya-desc {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* ============================================
+       FIX: MAHASISWA BERPRESTASI - SLIDER MOBILE
+       ============================================ */
+    .mahasiswa-slider {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 20px;
+        padding: 20px 5px;
+    }
+
+    .mahasiswa-slider::-webkit-scrollbar {
+        display: none;
+    }
+
     .mahasiswa-card {
-        min-width: 100%;
+        min-width: 75%;
+        max-width: 75%;
+        scroll-snap-align: center;
+    }
+
+    .mahasiswa-image {
+        height: 250px;
+    }
+
+    .mahasiswa-badge {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        top: 10px;
+        right: 10px;
+    }
+
+    .mahasiswa-content {
+        padding: 20px;
+    }
+
+    .mahasiswa-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .mahasiswa-year {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .mahasiswa-achievement {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Alumni */
+    .alumni-section {
+        padding: 50px 15px;
+    }
+
+    .alumni-list {
+        gap: 20px;
+    }
+
+    .alumni-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    .alumni-avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+
+    .alumni-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .alumni-position,
+    .alumni-year,
+    .alumni-story {
+        font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 50px 15px 25px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .footer-section p {
+        font-size: 0.9rem;
     }
 }
 
+/* Small Mobile */
 @media (max-width: 480px) {
     .hero-logo {
         width: 120px;
@@ -1102,7 +1305,7 @@ section {
     }
 
     .hero-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .hero-description {
@@ -1114,10 +1317,34 @@ section {
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .slider-container {
-        padding: 0 40px;
+        padding: 0 45px;
+    }
+
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .karya-card,
+    .mahasiswa-card {
+        min-width: 90%;
+        max-width: 90%;
+    }
+
+    .stat-card {
+        padding: 15px 10px;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
     }
 }
+
+/* ============================================
+   END MOBILE RESPONSIVE FIXES
+   ============================================ */
