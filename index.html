@@ -64,6 +64,34 @@
         </div>
     </section>
 
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Mahasiswa Aktif</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-label">Dosen Berkualitas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-flask"></i></div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Laboratorium</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-number" data-target="1000">0</div>
+                    <div class="stat-label">Alumni</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Tentang Section -->
     <section id="tentang" class="about-section">
         <div class="container">
@@ -100,34 +128,6 @@
                     <i class="fas fa-handshake"></i>
                     <h4>Kerjasama Industri</h4>
                     <p>Partnership dengan perusahaan terkemuka</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-number" data-target="500">0</div>
-                    <div class="stat-label">Mahasiswa Aktif</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                    <div class="stat-number" data-target="30">0</div>
-                    <div class="stat-label">Dosen Berkualitas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-flask"></i></div>
-                    <div class="stat-number" data-target="5">0</div>
-                    <div class="stat-label">Laboratorium</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
-                    <div class="stat-number" data-target="1000">0</div>
-                    <div class="stat-label">Alumni</div>
                 </div>
             </div>
         </div>
@@ -187,65 +187,7 @@
                 </button>
                 
                 <div class="karya-slider" id="karyaSlider">
-                    <div class="karya-card">
-                        <div class="karya-image">
-                            <img src="assets/karya-1.jpg" alt="Karya 1">
-                            <div class="karya-overlay">
-                                <span class="karya-category">Software Development</span>
-                            </div>
-                        </div>
-                        <div class="karya-content">
-                            <h3>Sistem Informasi Manajemen Produksi</h3>
-                            <p class="karya-author"><i class="fas fa-user"></i> Tim Mahasiswa Angkatan 2021</p>
-                            <p class="karya-desc">Aplikasi untuk mengoptimalkan proses manajemen produksi dengan dashboard interaktif</p>
-                            <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="karya-card">
-                        <div class="karya-image">
-                            <img src="assets/karya-2.jpg" alt="Karya 2">
-                            <div class="karya-overlay">
-                                <span class="karya-category">Robotika</span>
-                            </div>
-                        </div>
-                        <div class="karya-content">
-                            <h3>Robot Sortir Otomatis Berbasis AI</h3>
-                            <p class="karya-author"><i class="fas fa-user"></i> Kelompok Riset Otomasi</p>
-                            <p class="karya-desc">Robot pintar untuk sortir produk menggunakan computer vision dan machine learning</p>
-                            <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="karya-card">
-                        <div class="karya-image">
-                            <img src="assets/karya-3.jpg" alt="Karya 3">
-                            <div class="karya-overlay">
-                                <span class="karya-category">Penelitian</span>
-                            </div>
-                        </div>
-                        <div class="karya-content">
-                            <h3>Analisis Ergonomi Workstation</h3>
-                            <p class="karya-author"><i class="fas fa-user"></i> Lab LPSKE</p>
-                            <p class="karya-desc">Studi komprehensif tentang ergonomi workstation untuk meningkatkan produktivitas</p>
-                            <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="karya-card">
-                        <div class="karya-image">
-                            <img src="assets/karya-4.jpg" alt="Karya 4">
-                            <div class="karya-overlay">
-                                <span class="karya-category">Operations Research</span>
-                            </div>
-                        </div>
-                        <div class="karya-content">
-                            <h3>Optimasi Supply Chain Management</h3>
-                            <p class="karya-author"><i class="fas fa-user"></i> Mahasiswa Tugas Akhir</p>
-                            <p class="karya-desc">Model optimasi untuk efisiensi supply chain menggunakan algoritma genetika</p>
-                            <a href="#" class="karya-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    <!-- Data will be loaded from Firestore via script-dynamic.js -->
                 </div>
                 
                 <button class="slider-btn next-btn" id="karyaNext">
