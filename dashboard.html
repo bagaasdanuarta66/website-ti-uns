@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,7 +114,7 @@
             background: white;
             padding: 20px 30px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
@@ -173,7 +174,7 @@
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
 
@@ -229,7 +230,7 @@
             background: white;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .section-header {
@@ -264,7 +265,7 @@
 
         .action-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
         .action-card i {
@@ -312,6 +313,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -325,6 +327,7 @@
             <ul class="sidebar-menu">
                 <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
                 <li><a href="dashboard-lab.html"><i class="fas fa-flask"></i> Laboratorium</a></li>
+                <li><a href="dashboard-product.html"><i class="fas fa-box"></i> Product Mahasiswa</a></li>
                 <li><a href="dashboard-karya.html"><i class="fas fa-project-diagram"></i> Karya Mahasiswa</a></li>
                 <li><a href="dashboard-mahasiswa.html"><i class="fas fa-trophy"></i> Mahasiswa Berprestasi</a></li>
                 <li><a href="dashboard-alumni.html"><i class="fas fa-user-graduate"></i> Alumni</a></li>
@@ -366,10 +369,20 @@
                     <div class="number" id="totalLab">0</div>
                     <p style="font-size: 0.85rem; color: #6B7280;">Lab aktif</p>
                 </div>
+                <!-- Setelah card Laboratorium, TAMBAH ini -->
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Total Product</h3>
+                    <div class="number" id="totalProduct">0</div>
+                    <p style="font-size: 0.85rem; color: #6B7280;">Product mahasiswa</p>
+                </div>
                 <div class="stat-card">
                     <div class="stat-icon green">
                         <i class="fas fa-project-diagram"></i>
                     </div>
+
                     <h3>Total Karya</h3>
                     <div class="number" id="totalKarya">0</div>
                     <p style="font-size: 0.85rem; color: #6B7280;">Karya mahasiswa</p>
@@ -402,6 +415,12 @@
                         <i class="fas fa-flask"></i>
                         <h3>Laboratorium</h3>
                         <p>Kelola data laboratorium</p>
+                    </a>
+                    <!-- Setelah card Laboratorium, TAMBAH ini -->
+                    <a href="dashboard-product.html" class="action-card">
+                        <i class="fas fa-box"></i>
+                        <h3>Product Mahasiswa</h3>
+                        <p>Kelola product mahasiswa</p>
                     </a>
                     <a href="dashboard-karya.html" class="action-card">
                         <i class="fas fa-project-diagram"></i>
@@ -450,6 +469,10 @@
                 const labSnapshot = await getDocs(collection(db, 'laboratorium'));
                 document.getElementById('totalLab').textContent = labSnapshot.size;
 
+                const productSnapshot = await getDocs(collection(db, 'product_mahasiswa'));
+                document.getElementById('totalProduct').textContent = productSnapshot.size;
+
+                // Count Karya
                 // Count Karya
                 const karyaSnapshot = await getDocs(collection(db, 'karya'));
                 document.getElementById('totalKarya').textContent = karyaSnapshot.size;
@@ -484,4 +507,5 @@
         });
     </script>
 </body>
+
 </html>

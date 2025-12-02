@@ -252,6 +252,54 @@ async function loadLab() {
     }
 }
 
+// Load Product Mahasiswa
+async function loadProduct() {
+    try {
+        console.log('🔄 Loading product from Firestore...');
+        const productContainer = document.querySelector('.product-grid');
+        
+        if (!productContainer) {
+            console.log('❌ Product container not found');
+            return;
+        }
+
+        const querySnapshot = await getDocs(collection(db, 'product_mahasiswa'));
+        
+        if (querySnapshot.empty) {
+            console.log('⚠️ No product data found');
+            productContainer.innerHTML = '<p style="text-align:center; color:#6B7280; grid-column: 1/-1;">Belum ada data product mahasiswa.</p>';
+            return;
+        }
+
+        let html = '';
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            html += `
+                <a href="${data.link || '#'}" target="_blank" class="lab-card-link">
+                    <div class="lab-card-new">
+                        <div class="lab-logo" style="background: transparent;">
+                            <img src="${data.gambar_url}" alt="${data.nama_product}" 
+                                 onerror="this.src='https://via.placeholder.com/120'" 
+                                 style="width: 100px; height: 100px; object-fit: contain; background: transparent;">
+                        </div>
+                        <h3>${data.nama_product}</h3>
+                        <p>${data.deskripsi}</p>
+                    </div>
+                </a>
+            `;
+        });
+
+        productContainer.innerHTML = html;
+        console.log(`✅ Loaded ${querySnapshot.size} products`);
+    } catch (error) {
+        console.error('❌ Error loading product:', error);
+        const productContainer = document.querySelector('.product-grid');
+        if (productContainer) {
+            productContainer.innerHTML = '<p style="text-align:center; color:#EF4444; grid-column: 1/-1;">Gagal memuat data. Silakan refresh halaman.</p>';
+        }
+    }
+}
+
 // Load Alumni
 async function loadAlumni() {
     try {
@@ -427,6 +475,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadKarya(),
         loadMahasiswa(),
         loadLab(),
+        loadProduct(),
         loadAlumni()
     ]);
     

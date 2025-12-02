@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
@@ -45,6 +47,7 @@
                 <li><a href="#tentang" class="nav-link">Tentang</a></li>
                 <li><a href="#laboratorium" class="nav-link">Laboratorium</a></li>
                 <li><a href="#karya" class="nav-link">Karya</a></li>
+                <li><a href="#product" class="nav-link">Product</a></li>
                 <li><a href="#mahasiswa" class="nav-link">Mahasiswa Berprestasi</a></li>
                 <li><a href="#alumni" class="nav-link">Alumni</a></li>
             </ul>
@@ -70,22 +73,22 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-number" data-target="500+">0</div>
                     <div class="stat-label">Mahasiswa Aktif</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-number" data-target="30+">0</div>
                     <div class="stat-label">Dosen Berkualitas</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-flask"></i></div>
-                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-number" data-target="8">0</div>
                     <div class="stat-label">Laboratorium</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
-                    <div class="stat-number" data-target="1000">0</div>
+                    <div class="stat-number" data-target="1000+">0</div>
                     <div class="stat-label">Alumni</div>
                 </div>
             </div>
@@ -100,7 +103,9 @@
                 <div class="about-card">
                     <div class="about-icon"><i class="fas fa-eye"></i></div>
                     <h3>Visi</h3>
-                    <p>Menjadi program studi teknik industri yang unggul di tingkat nasional dan internasional dalam pengembangan ilmu pengetahuan, teknologi, dan seni bidang teknik industri yang berbasis riset untuk mendukung pembangunan berkelanjutan.</p>
+                    <p>Menjadi program studi teknik industri yang unggul di tingkat nasional dan internasional dalam
+                        pengembangan ilmu pengetahuan, teknologi, dan seni bidang teknik industri yang berbasis riset
+                        untuk mendukung pembangunan berkelanjutan.</p>
                 </div>
                 <div class="about-card">
                     <div class="about-icon"><i class="fas fa-bullseye"></i></div>
@@ -122,7 +127,7 @@
                 <div class="achievement-card">
                     <i class="fas fa-building"></i>
                     <h4>Fasilitas Modern</h4>
-                    <p>Laboratorium lengkap dan perpustakaan</p>
+                    <p>Laboratorium lengkap </p>
                 </div>
                 <div class="achievement-card">
                     <i class="fas fa-handshake"></i>
@@ -140,37 +145,18 @@
             <p class="section-subtitle">Fasilitas laboratorium modern untuk mendukung pembelajaran dan penelitian</p>
             <div class="lab-grid">
                 <a href="https://industri.ft.uns.ac.id/laboratorium-lpske/" target="_blank" class="lab-card-link">
-                    <div class="lab-card-new">
-                        <div class="lab-logo">
-                            <i class="fas fa-user-cog"></i>
-                        </div>
-                        <h3>LPSKE</h3>
-                        <h4>Lab Perancangan Sistem Kerja dan Ergonomi</h4>
-                        <p>Laboratorium yang fokus pada studi perancangan sistem kerja, ergonomi, dan keselamatan kerja dengan fasilitas lengkap untuk penelitian dan praktikum.</p>
-                    </div>
-                </a>
 
-                <a href="https://industri.ft.uns.ac.id/laboratorium-lstar/" target="_blank" class="lab-card-link">
-                    <div class="lab-card-new">
-                        <div class="lab-logo">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3>LSTAR</h3>
-                        <h4>Lab Sistem Produksi dan Otomasi</h4>
-                        <p>Laboratorium yang mengembangkan sistem produksi modern dan otomasi industri dengan teknologi terkini.</p>
-                    </div>
-                </a>
+            </div>
+        </div>
+    </section>
 
-                <a href="https://industri.ft.uns.ac.id/laboratorium-kualitas/" target="_blank" class="lab-card-link">
-                    <div class="lab-card-new">
-                        <div class="lab-logo">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Lab Kualitas</h3>
-                        <h4>Lab Pengendalian Kualitas</h4>
-                        <p>Fokus pada pengukuran, analisis, dan pengendalian kualitas produk dengan standar internasional.</p>
-                    </div>
-                </a>
+    <!-- Product Mahasiswa Section -->
+    <section id="product" class="product-section">
+        <div class="container">
+            <h2 class="section-title">Product Mahasiswa</h2>
+            <p class="section-subtitle">Produk inovatif hasil karya mahasiswa Teknik Industri UNS</p>
+            <div class="product-grid">
+                <!-- Data from Firestore -->
             </div>
         </div>
     </section>
@@ -180,16 +166,16 @@
         <div class="container">
             <h2 class="section-title">Karya Mahasiswa & Riset</h2>
             <p class="section-subtitle">Inovasi dan penelitian mahasiswa Teknik Industri UNS</p>
-            
+
             <div class="slider-container">
                 <button class="slider-btn prev-btn" id="karyaPrev">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                
+
                 <div class="karya-slider" id="karyaSlider">
                     <!-- Data will be loaded from Firestore via script-dynamic.js -->
                 </div>
-                
+
                 <button class="slider-btn next-btn" id="karyaNext">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -202,50 +188,16 @@
         <div class="container">
             <h2 class="section-title">Mahasiswa Berprestasi</h2>
             <p class="section-subtitle">Prestasi gemilang mahasiswa Teknik Industri UNS</p>
-            
+
             <div class="slider-container">
                 <button class="slider-btn prev-btn" id="mahasiswaPrev">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                
+
                 <div class="mahasiswa-slider" id="mahasiswaSlider">
                     <div class="mahasiswa-card">
-                        <div class="mahasiswa-image">
-                            <img src="assets/mahasiswa-1.jpg" alt="Ahmad Fauzi">
-                            <div class="mahasiswa-badge"><i class="fas fa-trophy"></i></div>
-                        </div>
-                        <div class="mahasiswa-content">
-                            <h3>Ahmad Fauzi</h3>
-                            <p class="mahasiswa-year"><i class="fas fa-calendar"></i> 2024</p>
-                            <p class="mahasiswa-achievement">Juara 1 Kompetisi Inovasi Teknologi Nasional 2024</p>
-                        </div>
                     </div>
 
-                    <div class="mahasiswa-card">
-                        <div class="mahasiswa-image">
-                            <img src="assets/mahasiswa-2.jpg" alt="Siti Nurhaliza">
-                            <div class="mahasiswa-badge"><i class="fas fa-trophy"></i></div>
-                        </div>
-                        <div class="mahasiswa-content">
-                            <h3>Siti Nurhaliza</h3>
-                            <p class="mahasiswa-year"><i class="fas fa-calendar"></i> 2024</p>
-                            <p class="mahasiswa-achievement">Best Paper Award - International Conference on Industrial Engineering</p>
-                        </div>
-                    </div>
-
-                    <div class="mahasiswa-card">
-                        <div class="mahasiswa-image">
-                            <img src="assets/mahasiswa-3.jpg" alt="Budi Santoso">
-                            <div class="mahasiswa-badge"><i class="fas fa-trophy"></i></div>
-                        </div>
-                        <div class="mahasiswa-content">
-                            <h3>Budi Santoso</h3>
-                            <p class="mahasiswa-year"><i class="fas fa-calendar"></i> 2023</p>
-                            <p class="mahasiswa-achievement">Juara 2 Lomba Karya Tulis Ilmiah Tingkat Nasional</p>
-                        </div>
-                    </div>
-                </div>
-                
                 <button class="slider-btn next-btn" id="mahasiswaNext">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -259,41 +211,7 @@
             <h2 class="section-title">Alumni Berprestasi</h2>
             <p class="section-subtitle">Jejak sukses alumni Teknik Industri UNS di berbagai bidang</p>
             <div class="alumni-list">
-                <div class="alumni-card">
-                    <div class="alumni-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="alumni-info">
-                        <h3>Dr. Rizki Pratama, S.T., M.T.</h3>
-                        <p class="alumni-position"><i class="fas fa-briefcase"></i> Production Manager - PT Toyota Astra Motor</p>
-                        <p class="alumni-year"><i class="fas fa-graduation-cap"></i> Lulusan 2015</p>
-                        <p class="alumni-story">Lulusan TI UNS yang kini memimpin divisi produksi di salah satu perusahaan otomotif terkemuka</p>
-                    </div>
-                </div>
-
-                <div class="alumni-card">
-                    <div class="alumni-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="alumni-info">
-                        <h3>Diah Ayu Lestari, S.T., MBA</h3>
-                        <p class="alumni-position"><i class="fas fa-briefcase"></i> Supply Chain Consultant - McKinsey & Company</p>
-                        <p class="alumni-year"><i class="fas fa-graduation-cap"></i> Lulusan 2017</p>
-                        <p class="alumni-story">Berkarir di konsultan internasional setelah menyelesaikan MBA di luar negeri</p>
-                    </div>
-                </div>
-
-                <div class="alumni-card">
-                    <div class="alumni-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="alumni-info">
-                        <h3>Eko Prasetyo, S.T., M.Sc.</h3>
-                        <p class="alumni-position"><i class="fas fa-briefcase"></i> Entrepreneur - Startup Technology</p>
-                        <p class="alumni-year"><i class="fas fa-graduation-cap"></i> Lulusan 2018</p>
-                        <p class="alumni-story">Founder startup teknologi yang fokus pada solusi manufaktur digital</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -316,7 +234,8 @@
                     <h3>Kontak</h3>
                     <p><i class="fas fa-map-marker-alt"></i> Jl. Ir. Sutami 36A, Kentingan, Surakarta 57126</p>
                     <p><i class="fas fa-phone"></i> (0271) 632163</p>
-                    <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfbba68fa9bbe1baa1bce1aeace1a6ab">[email&#160;protected]</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                            data-cfemail="cfbba68fa9bbe1baa1bce1aeace1a6ab">[email&#160;protected]</a></p>
                 </div>
                 <div class="footer-section">
                     <h3>Link Terkait</h3>
@@ -337,4 +256,5 @@
     <!-- Script -->
     <script type="module" src="script-dynamic.js"></script>
 </body>
+
 </html>

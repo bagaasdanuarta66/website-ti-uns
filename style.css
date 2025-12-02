@@ -1040,10 +1040,20 @@ section {
         padding: 40px 15px;
     }
 
+    /* JADI INI */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Update responsive juga */
+@media (max-width: 1024px) {
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        grid-template-columns: repeat(3, 1fr); /* 3 kolom tablet */
     }
+}
 
     .stat-card {
         padding: 20px 15px;
@@ -1383,6 +1393,24 @@ section {
 
     .stat-number {
         font-size: 1.8rem;
+    }
+}
+/* Product Section - Pakai style yang sama dengan Lab */
+.product-section {
+    background: var(--bg-light); /* Beda background dari lab */
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
